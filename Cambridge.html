@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Certificación | The Cambridge Institute</title>
+    <!-- Dependencias de Estilos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-material-ui/material-ui.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cambridge-red: #a90000;
+        }
+        body {
+            background-image: url('https://cdn.bitrix24.es/b15495391/landing/c7d/c7dfb8e2d312bf695a0d5c2455355bdd/Recurso_1-100_1x.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            font-family: 'Lato', sans-serif; min-height: 100vh; padding: 2rem 1rem;
+        }
+        .form-container {
+            max-width: 850px; margin: 2rem auto; background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px; padding: 2.5rem 3rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
+        }
+        .header { text-align: center; margin-bottom: 2.5rem; }
+        .header h2 {
+            font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+        .header p { color: rgba(255, 255, 255, 0.9); }
+        .form-label, .form-check-label { font-weight: 700; color: rgba(255, 255, 255, 0.95); }
+        .form-control, .form-select, .select2-container--default .select2-selection--single {
+            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff !important; padding: 0.9rem; border-radius: 10px !important; height: auto !important;
+        }
+        .form-control::placeholder { color: rgba(255, 255, 255, 0.7); opacity: 1; }
+        .form-control:focus, .select2-container--default.select2-container--open .select2-selection--single {
+            background: rgba(255, 255, 255, 0.25) !important; border-color: var(--cambridge-red) !important;
+            box-shadow: 0 0 0 0.25rem rgba(169, 0, 0, 0.4) !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered { color: #fff; line-height: 1.5; }
+        .select2-container--default .select2-selection--single .select2-selection__arrow b { border-color: #fff transparent transparent transparent; }
+        .select2-dropdown {
+            background: rgba(30, 30, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff;
+        }
+        .select2-results__option { color: #eee; }
+        .select2-results__option--highlighted { background-color: var(--cambridge-red) !important; color: #fff !important; }
+        .select2-search__field { background: transparent !important; color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); }
+        .form-check-label a { color: #fff; text-decoration: underline; }
+        .btn-submit {
+            background-color: var(--cambridge-red); border: none; color: #fff; font-weight: 700;
+            padding: 0.9rem; transition: all 0.3s ease; font-size: 1.1rem;
+            letter-spacing: 0.5px; text-transform: uppercase; border-radius: 10px;
+        }
+        .btn-submit:hover {
+            background-color: #8c0000; transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(169, 0, 0, 0.4);
+        }
+        .img-flag { margin-right: 8px; vertical-align: middle; height: 12px; }
+        @media (max-width: 768px) {
+            .form-container { padding: 2rem 1.5rem; }
+            .header h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container animate__animated animate__fadeInUp">
+            <div class="header">
+                <h2>Inicia tu Certificación</h2>
+                <p>Completa el formulario para iniciar tu proceso de certificación.</p>
+            </div>
+            <form id="registro-form" novalidate>
+                <input type="hidden" id="marca" name="marca" value="Cambridge">
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6"><input type="text" class="form-control" name="nombres" placeholder="Nombres" required></div>
+                    <div class="col-md-6"><input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required></div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6"><input type="email" class="form-control" name="correo" placeholder="Correo Electrónico" required></div>
+                    <div class="col-md-6"><input type="tel" class="form-control" name="telefono" placeholder="Teléfono / WhatsApp" required></div>
+                </div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <select class="form-select" id="pais" name="pais" required>
+                            <option value="" disabled selected>País de Residencia...</option>
+                            <option value="Afganistán" data-country-code="af">Afganistán</option><option value="Albania" data-country-code="al">Albania</option><option value="Alemania" data-country-code="de">Alemania</option><option value="Andorra" data-country-code="ad">Andorra</option><option value="Angola" data-country-code="ao">Angola</option><option value="Arabia Saudita" data-country-code="sa">Arabia Saudita</option><option value="Argelia" data-country-code="dz">Argelia</option><option value="Argentina" data-country-code="ar">Argentina</option><option value="Armenia" data-country-code="am">Armenia</option><option value="Australia" data-country-code="au">Australia</option><option value="Austria" data-country-code="at">Austria</option><option value="Azerbaiyán" data-country-code="az">Azerbaiyán</option><option value="Bahamas" data-country-code="bs">Bahamas</option><option value="Bangladés" data-country-code="bd">Bangladés</option><option value="Barbados" data-country-code="bb">Barbados</option><option value="Baréin" data-country-code="bh">Baréin</option><option value="Bélgica" data-country-code="be">Bélgica</option><option value="Belice" data-country-code="bz">Belice</option><option value="Bielorrusia" data-country-code="by">Bielorrusia</option><option value="Bolivia" data-country-code="bo">Bolivia</option><option value="Bosnia y Herzegovina" data-country-code="ba">Bosnia y Herzegovina</option><option value="Botsuana" data-country-code="bw">Botsuana</option><option value="Brasil" data-country-code="br">Brasil</option><option value="Bulgaria" data-country-code="bg">Bulgaria</option><option value="Camboya" data-country-code="kh">Camboya</option><option value="Camerún" data-country-code="cm">Camerún</option><option value="Canadá" data-country-code="ca">Canadá</option><option value="Catar" data-country-code="qa">Catar</option><option value="Chile" data-country-code="cl">Chile</option><option value="China" data-country-code="cn">China</option><option value="Chipre" data-country-code="cy">Chipre</option><option value="Colombia" data-country-code="co">Colombia</option><option value="Corea del Sur" data-country-code="kr">Corea del Sur</option><option value="Costa de Marfil" data-country-code="ci">Costa de Marfil</option><option value="Costa Rica" data-country-code="cr">Costa Rica</option><option value="Croacia" data-country-code="hr">Croacia</option><option value="Cuba" data-country-code="cu">Cuba</option><option value="Dinamarca" data-country-code="dk">Dinamarca</option><option value="Ecuador" data-country-code="ec">Ecuador</option><option value="Egipto" data-country-code="eg">Egipto</option><option value="El Salvador" data-country-code="sv">El Salvador</option><option value="Emiratos Árabes Unidos" data-country-code="ae">Emiratos Árabes Unidos</option><option value="Eslovaquia" data-country-code="sk">Eslovaquia</option><option value="Eslovenia" data-country-code="si">Eslovenia</option><option value="España" data-country-code="es">España</option><option value="Estados Unidos" data-country-code="us">Estados Unidos</option><option value="Estonia" data-country-code="ee">Estonia</option><option value="Etiopía" data-country-code="et">Etiopía</option><option value="Filipinas" data-country-code="ph">Filipinas</option><option value="Finlandia" data-country-code="fi">Finlandia</option><option value="Francia" data-country-code="fr">Francia</option><option value="Georgia" data-country-code="ge">Georgia</option><option value="Ghana" data-country-code="gh">Ghana</option><option value="Grecia" data-country-code="gr">Grecia</option><option value="Guatemala" data-country-code="gt">Guatemala</option><option value="Honduras" data-country-code="hn">Honduras</option><option value="Hungría" data-country-code="hu">Hungría</option><option value="India" data-country-code="in">India</option><option value="Indonesia" data-country-code="id">Indonesia</option><option value="Irak" data-country-code="iq">Irak</option><option value="Irán" data-country-code="ir">Irán</option><option value="Irlanda" data-country-code="ie">Irlanda</option><option value="Islandia" data-country-code="is">Islandia</option><option value="Israel" data-country-code="il">Israel</option><option value="Italia" data-country-code="it">Italia</option><option value="Jamaica" data-country-code="jm">Jamaica</option><option value="Japón" data-country-code="jp">Japón</option><option value="Jordania" data-country-code="jo">Jordania</option><option value="Kazajistán" data-country-code="kz">Kazajistán</option><option value="Kenia" data-country-code="ke">Kenia</option><option value="Kuwait" data-country-code="kw">Kuwait</option><option value="Letonia" data-country-code="lv">Letonia</option><option value="Líbano" data-country-code="lb">Líbano</option><option value="Lituania" data-country-code="lt">Lituania</option><option value="Luxemburgo" data-country-code="lu">Luxemburgo</option><option value="Macedonia del Norte" data-country-code="mk">Macedonia del Norte</option><option value="Malasia" data-country-code="my">Malasia</option><option value="Malta" data-country-code="mt">Malta</option><option value="Marruecos" data-country-code="ma">Marruecos</option><option value="México" data-country-code="mx">México</option><option value="Moldavia" data-country-code="md">Moldavia</option><option value="Mónaco" data-country-code="mc">Mónaco</option><option value="Mongolia" data-country-code="mn">Mongolia</option><option value="Montenegro" data-country-code="me">Montenegro</option><option value="Nepal" data-country-code="np">Nepal</option><option value="Nicaragua" data-country-code="ni">Nicaragua</option><option value="Nigeria" data-country-code="ng">Nigeria</option><option value="Noruega" data-country-code="no">Noruega</option><option value="Nueva Zelanda" data-country-code="nz">Nueva Zelanda</option><option value="Omán" data-country-code="om">Omán</option><option value="Países Bajos" data-country-code="nl">Países Bajos</option><option value="Pakistán" data-country-code="pk">Pakistán</option><option value="Panamá" data-country-code="pa">Panamá</option><option value="Paraguay" data-country-code="py">Paraguay</option><option value="Perú" data-country-code="pe">Perú</option><option value="Polonia" data-country-code="pl">Polonia</option><option value="Portugal" data-country-code="pt">Portugal</option><option value="Reino Unido" data-country-code="gb">Reino Unido</option><option value="República Checa" data-country-code="cz">República Checa</option><option value="República Dominicana" data-country-code="do">República Dominicana</option><option value="Rumania" data-country-code="ro">Rumania</option><option value="Rusia" data-country-code="ru">Rusia</option><option value="San Marino" data-country-code="sm">San Marino</option><option value="Senegal" data-country-code="sn">Senegal</option><option value="Serbia" data-country-code="rs">Serbia</option><option value="Singapur" data-country-code="sg">Singapur</option><option value="Siria" data-country-code="sy">Siria</option><option value="Sri Lanka" data-country-code="lk">Sri Lanka</option><option value="Sudáfrica" data-country-code="za">Sudáfrica</option><option value="Suecia" data-country-code="se">Suecia</option><option value="Suiza" data-country-code="ch">Suiza</option><option value="Tailandia" data-country-code="th">Tailandia</option><option value="Taiwán" data-country-code="tw">Taiwán</option><option value="Tanzania" data-country-code="tz">Tanzania</option><option value="Túnez" data-country-code="tn">Túnez</option><option value="Turquía" data-country-code="tr">Turquía</option><option value="Ucrania" data-country-code="ua">Ucrania</option><option value="Uganda" data-country-code="ug">Uganda</option><option value="Uruguay" data-country-code="uy">Uruguay</option><option value="Uzbekistán" data-country-code="uz">Uzbekistán</option><option value="Venezuela" data-country-code="ve">Venezuela</option><option value="Vietnam" data-country-code="vn">Vietnam</option><option value="Yemen" data-country-code="ye">Yemen</option><option value="Zambia" data-country-code="zm">Zambia</option><option value="Zimbabue" data-country-code="zw">Zimbabue</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="codigoMatricula" placeholder="Código de Matrícula" required>
+                    </div>
+                </div>
+
+                <!-- =================================================================== -->
+                <!--          NUEVO CAMPO DE COMENTARIOS AÑADIDO AQUÍ                    -->
+                <!-- =================================================================== -->
+                <div class="mb-3">
+                    <textarea class="form-control" name="comentarios" placeholder="Comentarios Adicionales (Opcional)" rows="3"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="archivo" class="form-label">Adjuntar Comprobante (Opcional)</label>
+                    <input type="file" class="form-control" id="archivo" name="archivo" accept=".pdf,.png,.jpg,.jpeg">
+                </div>
+                
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="politica" required>
+                    <label class="form-check-label" for="politica">Acepto los <a href="#">términos y condiciones</a> del proceso de certificación.</label>
+                </div>
+
+                <button type="submit" class="btn w-100 btn-submit">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
+    <!-- Scripts de JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="main.js"></script>
+    
+    <script>
+        function formatCountry(country) {
+            if (!country.element) { return country.text; }
+            var countryCode = $(country.element).data('country-code');
+            if (!countryCode) { return country.text; }
+            var flagUrl = 'https://flagcdn.com/16x12/' + countryCode.toLowerCase() + '.png';
+            var $country = $('<span><img src="' + flagUrl + '" class="img-flag" /> ' + country.text + '</span>');
+            return $country;
+        }
+        $(document).ready(function() {
+            $('#pais').select2({
+                placeholder: 'Selecciona un país...',
+                width: '100%',
+                templateResult: formatCountry,
+                templateSelection: formatCountry
+            });
+        });
+    </script>
+</body>
+</html>
